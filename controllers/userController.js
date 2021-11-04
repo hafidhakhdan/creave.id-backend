@@ -68,7 +68,7 @@ exports.login = async (req, res) => {
       { expiresIn: "1h" }
     );
     const { password, ...others } = user._doc;
-    res.status(200).json({ other, accessToken });
+    res.status(200).json({ others, accessToken });
   } catch (err) {
     res.status(500).json(err);
   }
