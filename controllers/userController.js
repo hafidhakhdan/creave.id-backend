@@ -6,27 +6,6 @@ const User = require("../models/User");
 var CryptoJS = require("crypto-js");
 
 exports.register = async (req, res) => {
-  // bcrypt.hash(req.body.password, 10, function (err, hashedPass) {
-  //   if (err) {
-  //     res.json({
-  //       error: err,
-  //     });
-  //   }
-
-  // newUser
-  //   .save()
-  //   .then((user) => {
-  //     res.json({
-  //       message: "User Register Succes",
-  //     });
-  //   })
-  //   .catch((error) => {
-  //     res.json({
-  //       message: "Error Gagal",
-  //     });
-  //   });
-  // });
-
   let newUser = new User({
     fullname: req.body.fullname,
     email: req.body.email,

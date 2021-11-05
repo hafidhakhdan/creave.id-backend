@@ -15,21 +15,6 @@ const index = (req, res, next) => {
     });
 };
 
-// const getDetail = (req, res, next) => {
-//   let galleryID = req.params.id;
-//   Gallery.findById(galleryID)
-//     .then((response) => {
-//       res.json({
-//         response,
-//       });
-//     })
-//     .catch((error) => {
-//       res.json({
-//         message: "Data Detail Error",
-//       });
-//     });
-// };
-
 const getDetail = async (req, res) => {
   const galleryID = req.params.id;
 

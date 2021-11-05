@@ -45,5 +45,5 @@ const webinarSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Webinar = mongoose.model("Webinar", weddingSchema);
+const Webinar = mongoose.model("Webinar", webinarSchema);
 module.exports = Webinar;

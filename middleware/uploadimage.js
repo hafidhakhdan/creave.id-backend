@@ -3,7 +3,13 @@ const multer = require("multer");
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads/");
+    if (file.fieldname === "imageCover") {
+      cb(null, "uploads/cover/");
+    } else if (file.fieldname === "imageGallery") {
+      cb(null, "uploads/gallery/");
+    } else if (file.fieldname === "provePayment") {
+      cb(null, "uploads/payment/");
+    }
   },
   filename: function (req, file, cb) {
     let ext = path.extname(file.originalname);

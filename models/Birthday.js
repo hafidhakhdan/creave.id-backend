@@ -4,15 +4,12 @@ const birthdaySchema = new mongoose.Schema(
   {
     date: {
       type: Date,
-      required: true,
     },
     theme: {
       type: String,
-      required: true,
     },
     guest: {
       type: Number,
-      required: true,
     },
     foodType: {
       type: String,
