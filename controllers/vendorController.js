@@ -6,7 +6,7 @@ const index = (req, res, next) => {
   Vendor.find()
     .then((response) => {
       res.json({
-        response,
+        dataVendor: response,
       });
     })
     .catch((error) => {
