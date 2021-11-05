@@ -7,6 +7,7 @@ const galleryController = require("../../controllers/galleryController");
 const birthdayController = require("../../controllers/birthdayController");
 const weddingController = require("../../controllers/weddingController");
 const webinarController = require("../../controllers/webinarController");
+const vendorController = require("../../controllers/vendorController");
 const upload = require("../../middleware/uploadimage");
 
 //Gallery Route
@@ -86,5 +87,12 @@ adminRouter.post(
   webinarController.updateWebinar
 );
 adminRouter.post("/deleteWebinar/:id", webinarController.destroyWebinar);
+
+//Vendor Route
+adminRouter.get("/vendor", vendorController.index);
+adminRouter.get("/vendor/:id", vendorController.getDetail);
+adminRouter.post("/addVendor", vendorController.addVendor);
+adminRouter.post("/updateVendor/:id", vendorController.updateVendor);
+adminRouter.post("/deleteVendor/:id", vendorController.destroyVendor);
 
 module.exports = adminRouter;
