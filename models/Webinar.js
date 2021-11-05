@@ -20,7 +20,7 @@ const webinarSchema = new mongoose.Schema(
       type: Number,
     },
     zoomPackage: {
-      type: Number,
+      type: String,
     },
     streaming: {
       type: String,

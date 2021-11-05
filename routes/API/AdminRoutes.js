@@ -72,4 +72,19 @@ adminRouter.post(
 );
 adminRouter.post("/deleteWedding/:id", weddingController.destroyWedding);
 
+//Webinar Route
+adminRouter.get("/webinar", webinarController.index);
+adminRouter.get("/webinar/:id", webinarController.getDetail);
+adminRouter.post(
+  "/addWebinar",
+  upload.single("provePayment"),
+  webinarController.addWebinar
+);
+adminRouter.post(
+  "/updateWebinar/:id",
+  upload.single("provePayment"),
+  webinarController.updateWebinar
+);
+adminRouter.post("/deleteWebinar/:id", webinarController.destroyWebinar);
+
 module.exports = adminRouter;
