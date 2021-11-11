@@ -1,6 +1,9 @@
 const Birthday = require("../models/Birthday");
 const path = require("path");
-const moment = require("moment");
+require("dotenv").config({ path: "./.env" });
+const { cloudinary } = require("../config/cloudinary.js");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const index = (req, res, next) => {
   Birthday.find()

@@ -1,4 +1,4 @@
-const Wedding = require("../models/Birthday");
+const Wedding = require("../models/Wedding");
 const path = require("path");
 const moment = require("moment");
 

@@ -55,7 +55,12 @@ const birthdaySchema = new mongoose.Schema(
       default: "Pending",
     },
     provePayment: {
-      type: String,
+      filename: {
+        type: String,
+      },
+      url: {
+        type: String,
+      },
     },
   },
   { timestamps: true }
