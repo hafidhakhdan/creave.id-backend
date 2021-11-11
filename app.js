@@ -4,7 +4,7 @@ const cors = require("cors");
 const app = express();
 const mongoose = require("mongoose");
 
-const config = require("./config");
+// const config = require("./config");
 const apiRoutes = require("./routes/index");
 const dotenv = require("dotenv");
 

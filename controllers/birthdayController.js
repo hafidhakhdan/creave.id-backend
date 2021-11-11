@@ -1,6 +1,6 @@
 const Birthday = require("../models/Birthday");
 const path = require("path");
-require("dotenv").config({ path: "./.env" });
+// require("dotenv").config({ path: "./.env" });
 const { cloudinary } = require("../config/cloudinary.js");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -55,8 +55,17 @@ const addBirthday = (req, res, next) => {
     status: req.body.status,
   });
 
+  const { path, filename } = req.file;
+
+  const image = {
+    filename: filename,
+    url: path,
+  };
+
   if (req.file) {
+    // birthday.provePayment = req.file.path;
     birthday.provePayment = req.file.path;
+    // birthday.url = req.file.path;
   }
 
   birthday
