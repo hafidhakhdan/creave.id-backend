@@ -32,11 +32,11 @@ const webinarSchema = new mongoose.Schema(
       type: String,
     },
     phone_number: {
-      type: Number,
+      type: String,
     },
     status: {
-      type: Boolean,
-      default: false,
+      type: String,
+      default: "Pending",
     },
     provePayment: {
       type: String,

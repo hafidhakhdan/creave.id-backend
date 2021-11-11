@@ -56,6 +56,12 @@ adminRouter.post(
   upload.single("provePayment"),
   birthdayController.updateBirthday
 );
+adminRouter.post(
+  "/paymentBirthday/:id",
+  upload.single("provePayment"),
+  birthdayController.updatePayment
+);
+adminRouter.post("/statusBirthday/:id", birthdayController.updateStatus);
 adminRouter.post("/deleteBirthday/:id", birthdayController.destroyBirthday);
 
 //Wedding Route
@@ -71,6 +77,12 @@ adminRouter.post(
   upload.single("provePayment"),
   weddingController.updateWedding
 );
+adminRouter.post(
+  "/paymentWedding/:id",
+  upload.single("provePayment"),
+  weddingController.updatePayment
+);
+adminRouter.post("/statusWedding/:id", weddingController.updateStatus);
 adminRouter.post("/deleteWedding/:id", weddingController.destroyWedding);
 
 //Webinar Route
@@ -86,6 +98,12 @@ adminRouter.post(
   upload.single("provePayment"),
   webinarController.updateWebinar
 );
+adminRouter.post(
+  "/paymentWebinar/:id",
+  upload.single("provePayment"),
+  webinarController.updatePayment
+);
+adminRouter.post("/statusWebinar/:id", webinarController.updateStatus);
 adminRouter.post("/deleteWebinar/:id", webinarController.destroyWebinar);
 
 //Vendor Route

@@ -115,6 +115,63 @@ const updateBirthday = async (req, res) => {
   }
 };
 
+//update status
+const updateStatus = async (req, res) => {
+  const birthdayID = req.params.id;
+
+  let updatedData = {
+    status: req.body.status,
+  };
+
+  try {
+    const birthday = await Birthday.findByIdAndUpdate(birthdayID, {
+      $set: updatedData,
+    });
+
+    res.json({
+      message: "Update Status Data Success",
+      updatedData,
+    });
+  } catch (error) {
+    res.json({
+      message: "Error Update Status",
+    });
+  }
+};
+
+//update payment
+const updatePayment = async (req, res) => {
+  const birthdayID = req.params.id;
+
+  let updatedData = {};
+
+  if (req.file) {
+    updatedData.provePayment = req.file.path;
+  }
+
+  try {
+    const birthday = await Birthday.findById(birthdayID);
+
+    if (birthday.status === "On Payment") {
+      const statusPayment = await Birthday.findByIdAndUpdate(birthdayID, {
+        $set: updatedData,
+      });
+
+      res.json({
+        message: "Upload Pembayaran berhasil",
+      });
+    } else {
+      res.json({
+        message: "Pembayaran tidak bisa dilakukan",
+      });
+    }
+  } catch (error) {
+    res.json({
+      message: "Data Payment Error",
+    });
+  }
+};
+
 //delete
 const destroyBirthday = (req, res, next) => {
   let birthdayID = req.params.id;
@@ -137,5 +194,7 @@ module.exports = {
   getDetail,
   addBirthday,
   updateBirthday,
+  updateStatus,
   destroyBirthday,
+  updatePayment,
 };

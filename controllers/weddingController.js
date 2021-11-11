@@ -115,6 +115,63 @@ const updateWedding = async (req, res) => {
   }
 };
 
+//update status
+const updateStatus = async (req, res) => {
+  const weddingID = req.params.id;
+
+  let updatedData = {
+    status: req.body.status,
+  };
+
+  try {
+    const wedding = await Wedding.findByIdAndUpdate(weddingID, {
+      $set: updatedData,
+    });
+
+    res.json({
+      message: "Update Status Data Success",
+      updatedData,
+    });
+  } catch (error) {
+    res.json({
+      message: "Error Update Status",
+    });
+  }
+};
+
+//update payment
+const updatePayment = async (req, res) => {
+  const weddingID = req.params.id;
+
+  let updatedData = {};
+
+  if (req.file) {
+    updatedData.provePayment = req.file.path;
+  }
+
+  try {
+    const wedding = await Wedding.findById(weddingID);
+
+    if (wedding.status === "On Payment") {
+      const statusPayment = await Wedding.findByIdAndUpdate(weddingID, {
+        $set: updatedData,
+      });
+
+      res.json({
+        message: "Upload Pembayaran berhasil",
+      });
+    } else {
+      res.json({
+        message: "Pembayaran tidak bisa dilakukan",
+      });
+    }
+  } catch (error) {
+    res.json({
+      message: "Data Payment Error",
+    });
+  }
+};
+
 //delete
 const destroyWedding = (req, res, next) => {
   let weddingID = req.params.id;
@@ -138,4 +195,6 @@ module.exports = {
   addWedding,
   updateWedding,
   destroyWedding,
+  updateStatus,
+  updatePayment,
 };

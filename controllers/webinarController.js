@@ -105,6 +105,63 @@ const updateWebinar = async (req, res) => {
   }
 };
 
+//update status
+const updateStatus = async (req, res) => {
+  const webinarID = req.params.id;
+
+  let updatedData = {
+    status: req.body.status,
+  };
+
+  try {
+    const webinar = await Webinar.findByIdAndUpdate(webinarID, {
+      $set: updatedData,
+    });
+
+    res.json({
+      message: "Update Status Data Success",
+      updatedData,
+    });
+  } catch (error) {
+    res.json({
+      message: "Error Update Status",
+    });
+  }
+};
+
+//update payment
+const updatePayment = async (req, res) => {
+  const webinarID = req.params.id;
+
+  let updatedData = {};
+
+  if (req.file) {
+    updatedData.provePayment = req.file.path;
+  }
+
+  try {
+    const webinar = await Webinar.findById(webinarID);
+
+    if (webinar.status === "On Payment") {
+      const statusPayment = await Webinar.findByIdAndUpdate(webinarID, {
+        $set: updatedData,
+      });
+
+      res.json({
+        message: "Upload Pembayaran berhasil",
+      });
+    } else {
+      res.json({
+        message: "Pembayaran tidak bisa dilakukan",
+      });
+    }
+  } catch (error) {
+    res.json({
+      message: "Data Payment Error",
+    });
+  }
+};
+
 //delete
 const destroyWebinar = (req, res, next) => {
   let webinarID = req.params.id;
@@ -128,4 +185,6 @@ module.exports = {
   addWebinar,
   updateWebinar,
   destroyWebinar,
+  updateStatus,
+  updatePayment,
 };
