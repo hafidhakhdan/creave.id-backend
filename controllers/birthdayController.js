@@ -55,12 +55,12 @@ const addBirthday = (req, res, next) => {
     status: req.body.status,
   });
 
-  const { path, filename } = req.file;
+  // const { path, filename } = req.file;
 
-  const image = {
-    filename: filename,
-    url: path,
-  };
+  // const image = {
+  //   filename: filename,
+  //   url: path,
+  // };
 
   if (req.file) {
     // birthday.provePayment = req.file.path;
