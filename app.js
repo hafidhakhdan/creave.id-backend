@@ -26,7 +26,7 @@ mongoose
     console.log(err);
   });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 app.get("/api", (req, res) => res.send("You are connected to Creave.id API"));
 

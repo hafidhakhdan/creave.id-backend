@@ -133,16 +133,18 @@ const updateStatus = async (req, res) => {
 const updatePayment = async (req, res) => {
   const webinarID = req.params.id;
 
-  let updatedData = {};
-
-  if (req.file) {
-    updatedData.provePayment = req.file.path;
-  }
-
   try {
+    const result = await cloudinary.uploader.upload(req.file.path);
     const webinar = await Webinar.findById(webinarID);
 
-    if (webinar.status === "On Payment") {
+    let updatedData = {
+      provePayment: {
+        filename: req.file.originalname,
+        url: result.secure_url,
+      },
+    };
+
+    if (webinar.status === "waiting payment") {
       const statusPayment = await Webinar.findByIdAndUpdate(webinarID, {
         $set: updatedData,
       });

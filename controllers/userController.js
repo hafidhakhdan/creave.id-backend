@@ -3,6 +3,9 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
+const Birthday = require("../models/Birthday");
+const Webinar = require("../models/Webinar");
+const Wedding = require("../models/Wedding");
 var CryptoJS = require("crypto-js");
 
 exports.register = async (req, res) => {
@@ -48,6 +51,54 @@ exports.login = async (req, res) => {
     );
     const { password, ...others } = user._doc;
     res.status(200).json({ others, accessToken });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+exports.getOrderBirthday = async (req, res) => {
+  try {
+    const user = await User.findOne({ fullname: req.body.fullname });
+
+    !user && res.status(401).json("Data Tidak Ditemukan");
+
+    const order = await Birthday.findOne({ fullname: user.fullname });
+    !order && res.status(401).json("Tidak ada pesanan");
+    res.json({
+      order,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+exports.getOrderWedding = async (req, res) => {
+  try {
+    const user = await User.findOne({ fullname: req.body.fullname });
+
+    !user && res.status(401).json("Data Tidak Ditemukan");
+
+    const order = await Wedding.findOne({ fullname: user.fullname });
+    !order && res.status(401).json("Tidak ada pesanan");
+    res.json({
+      order,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+exports.getOrderWebinar = async (req, res) => {
+  try {
+    const user = await User.findOne({ fullname: req.body.fullname });
+
+    !user && res.status(401).json("Data Tidak Ditemukan");
+
+    const order = await Webinar.findOne({ fullname: user.fullname });
+    !order && res.status(401).json("Tidak ada pesanan");
+    res.json({
+      order,
+    });
   } catch (err) {
     res.status(500).json(err);
   }

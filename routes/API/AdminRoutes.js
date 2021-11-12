@@ -46,16 +46,8 @@ adminRouter.post("/deleteGallery/:id", galleryController.destroy);
 //Birthday Route
 adminRouter.get("/birthday", birthdayController.index);
 adminRouter.get("/birthday/:id", birthdayController.getDetail);
-adminRouter.post(
-  "/addBirthday",
-  upload.single("provePayment"),
-  birthdayController.addBirthday
-);
-adminRouter.post(
-  "/updateBirthday/:id",
-  upload.single("provePayment"),
-  birthdayController.updateBirthday
-);
+adminRouter.post("/addBirthday", birthdayController.addBirthday);
+adminRouter.post("/updateBirthday/:id", birthdayController.updateBirthday);
 adminRouter.post(
   "/paymentBirthday/:id",
   upload.single("provePayment"),

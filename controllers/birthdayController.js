@@ -3,6 +3,7 @@ const path = require("path");
 // require("dotenv").config({ path: "./.env" });
 const { cloudinary } = require("../config/cloudinary.js");
 const dotenv = require("dotenv");
+const upload = require("../middleware/uploadimage.js");
 dotenv.config();
 
 const index = (req, res, next) => {
@@ -36,9 +37,9 @@ const getDetail = async (req, res) => {
 
 const addBirthday = (req, res, next) => {
   let birthday = new Birthday({
+    date: req.body.date,
     theme: req.body.theme,
     guest: req.body.guest,
-    date: req.body.date,
     foodType: req.body.foodType,
     foodTotal: req.body.foodTotal,
     entertain: req.body.entertain,
@@ -52,21 +53,7 @@ const addBirthday = (req, res, next) => {
     totalPrice: req.body.totalPrice,
     fullname: req.body.fullname,
     phone_number: req.body.phone_number,
-    status: req.body.status,
   });
-
-  // const { path, filename } = req.file;
-
-  // const image = {
-  //   filename: filename,
-  //   url: path,
-  // };
-
-  if (req.file) {
-    // birthday.provePayment = req.file.path;
-    birthday.provePayment = req.file.path;
-    // birthday.url = req.file.path;
-  }
 
   birthday
     .save()
@@ -155,16 +142,18 @@ const updateStatus = async (req, res) => {
 const updatePayment = async (req, res) => {
   const birthdayID = req.params.id;
 
-  let updatedData = {};
-
-  if (req.file) {
-    updatedData.provePayment = req.file.path;
-  }
-
   try {
+    const result = await cloudinary.uploader.upload(req.file.path);
     const birthday = await Birthday.findById(birthdayID);
 
-    if (birthday.status === "On Payment") {
+    let updatedData = {
+      provePayment: {
+        filename: req.file.originalname,
+        url: result.secure_url,
+      },
+    };
+
+    if (birthday.status === "waiting payment") {
       const statusPayment = await Birthday.findByIdAndUpdate(birthdayID, {
         $set: updatedData,
       });
@@ -172,9 +161,13 @@ const updatePayment = async (req, res) => {
       res.json({
         message: "Upload Pembayaran berhasil",
       });
+    } else if (birthday.status === "Pending") {
+      res.json({
+        message: "Pembayaran belum bisa dilakukan",
+      });
     } else {
       res.json({
-        message: "Pembayaran tidak bisa dilakukan",
+        message: "Pembayaran tidak dapat dilakukan dilakukan",
       });
     }
   } catch (error) {

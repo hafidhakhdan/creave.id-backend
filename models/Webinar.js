@@ -4,11 +4,9 @@ const webinarSchema = new mongoose.Schema(
   {
     date: {
       type: Date,
-      required: true,
     },
     theme: {
       type: String,
-      required: true,
     },
     designPublication: {
       type: String,
@@ -39,7 +37,12 @@ const webinarSchema = new mongoose.Schema(
       default: "Pending",
     },
     provePayment: {
-      type: String,
+      filename: {
+        type: String,
+      },
+      url: {
+        type: String,
+      },
     },
   },
   { timestamps: true }

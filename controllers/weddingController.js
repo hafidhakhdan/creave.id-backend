@@ -49,12 +49,7 @@ const addWedding = (req, res, next) => {
     totalPrice: req.body.totalPrice,
     fullname: req.body.fullname,
     phone_number: req.body.phone_number,
-    status: req.body.status,
   });
-
-  if (req.file) {
-    wedding.provePayment = req.file.path;
-  }
 
   wedding
     .save()
@@ -143,16 +138,18 @@ const updateStatus = async (req, res) => {
 const updatePayment = async (req, res) => {
   const weddingID = req.params.id;
 
-  let updatedData = {};
-
-  if (req.file) {
-    updatedData.provePayment = req.file.path;
-  }
-
   try {
-    const wedding = await Wedding.findById(weddingID);
+    const result = await cloudinary.uploader.upload(req.file.path);
+    const wedding = await Birthday.findById(weddingID);
 
-    if (wedding.status === "On Payment") {
+    let updatedData = {
+      provePayment: {
+        filename: req.file.originalname,
+        url: result.secure_url,
+      },
+    };
+
+    if (wedding.status === "waiting payment") {
       const statusPayment = await Wedding.findByIdAndUpdate(weddingID, {
         $set: updatedData,
       });
@@ -160,9 +157,13 @@ const updatePayment = async (req, res) => {
       res.json({
         message: "Upload Pembayaran berhasil",
       });
+    } else if (wedding.status === "Pending") {
+      res.json({
+        message: "Pembayaran belum bisa dilakukan",
+      });
     } else {
       res.json({
-        message: "Pembayaran tidak bisa dilakukan",
+        message: "Pembayaran tidak dapat dilakukan dilakukan",
       });
     }
   } catch (error) {

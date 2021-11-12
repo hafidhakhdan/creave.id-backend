@@ -4,15 +4,12 @@ const weddingSchema = new mongoose.Schema(
   {
     date: {
       type: Date,
-      required: true,
     },
     theme: {
       type: String,
-      required: true,
     },
     guest: {
       type: Number,
-      required: true,
     },
     foodType: {
       type: String,
@@ -58,7 +55,12 @@ const weddingSchema = new mongoose.Schema(
       default: "Pending",
     },
     provePayment: {
-      type: String,
+      filename: {
+        type: String,
+      },
+      url: {
+        type: String,
+      },
     },
   },
   { timestamps: true }

@@ -42,4 +42,20 @@ userRouter.post(
   webinarController.updateWebinar
 );
 
+//Get Pesanan Birthday
+userRouter.post("/birthday", userController.getOrderBirthday);
+
+//Update payment birthday
+userRouter.post(
+  "/paymentWebinar/:id",
+  upload.single("provePayment"),
+  webinarController.updatePayment
+);
+
+//Get Pesanan Wedding
+userRouter.post("/wedding", userController.getOrderWedding);
+
+//Get Pesanan Webinar
+userRouter.post("/webinar", userController.getOrderWebinar);
+
 module.exports = userRouter;

@@ -7,13 +7,12 @@ const CloudinaryStorages = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: (req, file) => {
-      let subFolder = "";
       if (file.fieldname === "imageCover") {
-        subFolder = "assets/venue/venue_photos";
+        return "assets/image/cover";
       } else if (file.fieldname === "imageGallery") {
-        subFolder = "assets/venue/documents";
+        return "assets/image/gallery";
       } else if (file.fieldname === "provePayment") {
-        return subFolder;
+        return "assets/image/payment";
       }
     },
   },
@@ -45,6 +44,10 @@ var upload = multer({
   //     callback(null, false);
   //   }
   // },
+  fileFilter: function (req, file, cb) {
+    let ext = path.extname(file.originalname);
+    cb(null, ext);
+  },
   limits: {
     fileSize: 1024 * 1024 * 2,
   },

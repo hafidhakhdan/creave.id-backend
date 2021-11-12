@@ -4,21 +4,28 @@ const gallerySchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: true,
     },
     description: {
       type: String,
-      required: true,
     },
     date: {
       type: Date,
-      required: true,
     },
     imageCover: {
-      type: String,
+      filename: {
+        type: String,
+      },
+      url: {
+        type: String,
+      },
     },
     imageGallery: {
-      type: String,
+      filename: {
+        type: String,
+      },
+      url: {
+        type: String,
+      },
     },
   },
   { timestamps: true }
