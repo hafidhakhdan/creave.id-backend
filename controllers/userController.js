@@ -62,7 +62,7 @@ exports.getOrderBirthday = async (req, res) => {
 
     !user && res.status(401).json("Data Tidak Ditemukan");
 
-    const order = await Birthday.findOne({ fullname: user.fullname });
+    const order = await Birthday.find({ fullname: user.fullname });
     !order && res.status(401).json("Tidak ada pesanan");
     res.json({
       order,
@@ -78,7 +78,7 @@ exports.getOrderWedding = async (req, res) => {
 
     !user && res.status(401).json("Data Tidak Ditemukan");
 
-    const order = await Wedding.findOne({ fullname: user.fullname });
+    const order = await Wedding.find({ fullname: user.fullname });
     !order && res.status(401).json("Tidak ada pesanan");
     res.json({
       order,
@@ -94,7 +94,7 @@ exports.getOrderWebinar = async (req, res) => {
 
     !user && res.status(401).json("Data Tidak Ditemukan");
 
-    const order = await Webinar.findOne({ fullname: user.fullname });
+    const order = await Webinar.find({ fullname: user.fullname });
     !order && res.status(401).json("Tidak ada pesanan");
     res.json({
       order,
