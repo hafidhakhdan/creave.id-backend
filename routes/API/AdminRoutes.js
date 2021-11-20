@@ -13,18 +13,23 @@ const upload = require("../../middleware/uploadimage");
 //Gallery Route
 adminRouter.get("/gallery", galleryController.index);
 adminRouter.get("/gallery/:id", galleryController.getDetail);
+// adminRouter.post(
+//   "/addGallery",
+//   upload.fields([
+//     {
+//       name: "imageCover",
+//       maxCount: 1,
+//     },
+//     {
+//       name: "imageGallery",
+//       maxCount: 10,
+//     },
+//   ]),
+//   galleryController.store
+// );
 adminRouter.post(
   "/addGallery",
-  upload.fields([
-    {
-      name: "imageCover",
-      maxCount: 1,
-    },
-    {
-      name: "imageGallery",
-      maxCount: 10,
-    },
-  ]),
+  upload.single("imageCover"),
   galleryController.store
 );
 adminRouter.post(
