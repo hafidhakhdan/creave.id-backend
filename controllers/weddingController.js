@@ -144,7 +144,7 @@ const updatePayment = async (req, res) => {
 
   try {
     const result = await cloudinary.uploader.upload(req.file.path);
-    const wedding = await Birthday.findById(weddingID);
+    const wedding = await Wedding.findById(weddingID);
 
     let updatedData = {
       provePayment: {

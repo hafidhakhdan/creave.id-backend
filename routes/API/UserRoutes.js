@@ -65,7 +65,7 @@ userRouter.post(
 //Get Pesanan Webinar
 userRouter.post("/webinar", userController.getOrderWebinar);
 
-//Update payment birthday
+//Update payment webinar
 userRouter.post(
   "/paymentWebinar/:id",
   upload.single("provePayment"),
