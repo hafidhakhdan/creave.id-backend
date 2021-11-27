@@ -14,9 +14,11 @@ const gallerySchema = new mongoose.Schema(
     imageCover: {
       filename: {
         type: String,
+        default: "Test",
       },
       url: {
         type: String,
+        default: "Test",
       },
     },
     imageGallery: {

@@ -64,9 +64,8 @@ const store = async (req, res) => {
   //   pathCover,
   //   pathGallery,
   // });
+  const result = await cloudinary.uploader.upload(req.file.path);
   try {
-    const result = await cloudinary.uploader.upload(req.file.path);
-
     let gallery = new Gallery({
       title: req.body.title,
       description: req.body.description,
@@ -77,48 +76,46 @@ const store = async (req, res) => {
         url: result.secure_url,
       },
     });
-
-    gallery
-      .save()
-      .then((response) => {
-        res.json({
-          message: "Data Added",
-          response,
-        });
-      })
-      .catch((error) => {
-        res.json({
-          message: "Data  Error",
-        });
-      });
+    const saveGallery = await gallery.save();
+    res.json({
+      message: "Data Saved",
+      saveGallery,
+    });
+    // gallery
+    //   .save()
+    //   .then((response) => {
+    //     res.json({
+    //       message: "Data Added",
+    //       response,
+    //     });
+    //   })
+    //   .catch((error) => {
+    //     res.json({
+    //       message: "Data  Error",
+    //     });
+    //   });
     // let urls = [];
-
     // for (const file of files) {
     //   const { path } = file;
     //   const newPath = await cloudinaryImageUploadMethod(path);
     //   urls.push(newPath);
     // }
-
     // const product = {
     //   productImages: urls.map((url) => url.res),
     // };
-
     // res.json({
     //   product,
     // });
     // let multiple = async (path) => await cloudinary.uploader.upload(path);
     // const result = await cloudinary.uploader.upload(req.files.path);
     // let filePaths = req.files.imageGallery;
-
     // for (const file of files) {
     //   const { path } = file;
     //   console.log("path", file);
-
     //   const newPath = await multiple(path);
     //   urls.push(newPath);
     //   fs.unlinkSync(path);
     // }
-
     // let data = {
     //   title: req.body.title,
     //   description: req.body.description,
@@ -127,13 +124,11 @@ const store = async (req, res) => {
     //     url : req.files
     //   }
     // }
-
     // res.json({
     //   multiple,
     // });
     // if (urls) {
     //   let body = req.body;
-
     //   let bodyw = _.extend(body, { imageGallery: urls });
     //   let data = {
     //     title: body.title,
@@ -144,7 +139,6 @@ const store = async (req, res) => {
     //       url: urls,
     //     },
     //   };
-
     //   res.json({
     //     data,
     //   });

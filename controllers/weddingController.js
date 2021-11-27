@@ -1,6 +1,10 @@
 const Wedding = require("../models/Wedding");
 const path = require("path");
 const moment = require("moment");
+const { cloudinary } = require("../config/cloudinary.js");
+const dotenv = require("dotenv");
+const upload = require("../middleware/uploadimage.js");
+dotenv.config();
 
 const index = (req, res, next) => {
   Wedding.find()
