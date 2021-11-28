@@ -57,9 +57,11 @@ const birthdaySchema = new mongoose.Schema(
     provePayment: {
       filename: {
         type: String,
+        default: null,
       },
       url: {
         type: String,
+        default: null,
       },
     },
   },

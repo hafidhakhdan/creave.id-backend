@@ -24,9 +24,11 @@ const gallerySchema = new mongoose.Schema(
     imageGallery: {
       filename: {
         type: String,
+        default: null,
       },
       url: {
         type: String,
+        default: null,
       },
     },
   },
