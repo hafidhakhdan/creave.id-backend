@@ -18,6 +18,7 @@ exports.register = async (req, res) => {
       process.env.SECRET_KEY
     ).toString(),
     username: req.body.username,
+    isAdmin: req.body.isAdmin,
   });
 
   try {
