@@ -48,22 +48,6 @@ const cloudinaryImageUploadMethod = async (file) => {
 };
 
 const store = async (req, res) => {
-  // const files = req.files;
-
-  // if (files) {
-  //   let path = "";
-  //   let pathCover = "";
-  //   files["imageGallery"].forEach(async function (files) {
-  //     path = path + files.path + ",";
-  //   });
-  //   pathGallery = path.substring(0, path.lastIndexOf(","));
-  //   pathCover = files.imageCover[0].path;
-  // }
-
-  // res.json({
-  //   pathCover,
-  //   pathGallery,
-  // });
   const result = await cloudinary.uploader.upload(req.file.path);
   try {
     let gallery = new Gallery({

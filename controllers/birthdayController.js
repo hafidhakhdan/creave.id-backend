@@ -167,7 +167,7 @@ const updatePayment = async (req, res) => {
       });
     } else {
       res.json({
-        message: "Pembayaran tidak dapat dilakukan dilakukan",
+        message: "Pembayaran tidak dapat dilakukan",
       });
     }
   } catch (error) {

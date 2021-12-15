@@ -21,7 +21,47 @@ const gallerySchema = new mongoose.Schema(
         default: "Test",
       },
     },
-    imageGallery: {
+    imageGallery1: {
+      filename: {
+        type: String,
+        default: null,
+      },
+      url: {
+        type: String,
+        default: null,
+      },
+    },
+    imageGallery2: {
+      filename: {
+        type: String,
+        default: null,
+      },
+      url: {
+        type: String,
+        default: null,
+      },
+    },
+    imageGallery3: {
+      filename: {
+        type: String,
+        default: null,
+      },
+      url: {
+        type: String,
+        default: null,
+      },
+    },
+    imageGallery4: {
+      filename: {
+        type: String,
+        default: null,
+      },
+      url: {
+        type: String,
+        default: null,
+      },
+    },
+    imageGallery5: {
       filename: {
         type: String,
         default: null,
