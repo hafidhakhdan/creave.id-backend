@@ -9,25 +9,37 @@ const Wedding = require("../models/Wedding");
 var CryptoJS = require("crypto-js");
 
 exports.register = async (req, res) => {
-  let newUser = new User({
-    fullname: req.body.fullname,
-    email: req.body.email,
-    phone_number: req.body.phone_number,
-    password: CryptoJS.AES.encrypt(
-      req.body.password,
-      process.env.SECRET_KEY
-    ).toString(),
-    username: req.body.username,
-    isAdmin: req.body.isAdmin,
-  });
+  const user = await User.findOne({ username: req.body.username });
+  if (!user) {
+    const cekemail = await User.findOne({ email: req.body.email });
+    if (!cekemail) {
+      let newUser = new User({
+        fullname: req.body.fullname,
+        email: req.body.email,
+        phone_number: req.body.phone_number,
+        password: CryptoJS.AES.encrypt(
+          req.body.password,
+          process.env.SECRET_KEY
+        ).toString(),
+        username: req.body.username,
+        isAdmin: req.body.isAdmin,
+      });
 
-  try {
-    const savedUser = await newUser.save();
-    const user = await User.findOne({ username: newUser.username });
+      try {
+        const savedUser = await newUser.save();
+        // const user = await User.findOne({ username: newUser.username });
 
-    res.status(201).json(savedUser);
-  } catch (err) {
-    res.status(500).json(err);
+        res.status(201).json(savedUser);
+      } catch (err) {
+        res.status(500).json(err);
+      }
+    } else {
+      res.status(500).json({
+        message: "Email has been registered",
+      });
+    }
+  } else {
+    res.status(400).json({ message: "Username already exists" });
   }
 };
 
