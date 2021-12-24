@@ -34,12 +34,12 @@ exports.register = async (req, res) => {
         res.status(500).json(err);
       }
     } else {
-      res.status(500).json({
-        message: "Email has been registered",
+      res.json({
+        message: "Email telah digunakan",
       });
     }
   } else {
-    res.status(400).json({ message: "Username already exists" });
+    res.json({ message: "Username telah digunakan" });
   }
 };
 
