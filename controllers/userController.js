@@ -39,7 +39,7 @@ exports.register = async (req, res) => {
       });
     }
   } else {
-    res.status(502).json({ message: "Username telahdigunakan" });
+    res.status(502).json({ message: "Username telah digunakan" });
   }
 };
 
